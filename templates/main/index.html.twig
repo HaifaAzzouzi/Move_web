@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Acceuil{% endblock %}
+
+{% block body %}
+
+<div class="container">
+	
+
+	{% for annonce in annonces %}
+
+
+     {% for image in annonce.images %}
+				<div class="caroulix-item">
+					<img src="{{ asset('uploads/images/annonces/' ~ image.name)}}"  width="400"
+     height="341" alt="{{ annonce.title }}"/>
+				</div>
+        
+			{% endfor %}
+      <div class="card" style="width: 26rem;">
+  
+  <div class="card-body">
+    <h3 class="card-title">{{annonce.title}}</h3>
+    <h5 class="card-text">{{annonce.categories.name}}</h5>
+    <p class="card-text">{{annonce.content|striptags|u.truncate(50,'...')}}</p>
+    <a href="{{ path("details",  {slug: annonce.slug}) }}"{{ annonce.title }} class="btn btn-primary">details</a>
+  </div>
+</div>
+</div>
+{% endfor %}
+{% endblock %}

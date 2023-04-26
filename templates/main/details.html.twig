@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{annonce.title}}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+	   
+		<div class="card mb-3">
+			{% for image in annonce.images %}
+				<img class="card-img-top" src="{{ asset('uploads/images/annonces/' ~ image.name)}}" width="600"
+    				height="400" alt="{{ annonce.title }}"/>
+			{% endfor %}
+		
+			<div class="card-body">
+				<h3 class="card-title">{{ annonce.title }}</h3>
+				<h5 class="card-text">
+					<p>Catégorie :
+						{{ annonce.categories.name }}</p>
+					<p>
+						{{ annonce.content|raw }}
+
+					</p>
+				</h5>
+    
+</a>
+			</div>
+		</div>
+
+		<div class="card-body">
+			<div class="col-xs2 col-sm3">
+				<h2>Liste des commentaires</h2>
+				{% for comment in annonce.comments %}
+					{% if comment.parent == null %}
+						<h3>Commentaire de {{comment.nickname}}</h3>
+						<p>Publié le {{comment.createdAt|date("d/m/Y H:i") }}</p>
+						<div>{{comment.content|raw}}</div>
+						<p><a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" class="btn primary press">Répondre</a></p>
+
+						{# On affiche les réponses #}
+						{% for reply in comment.replies %}
+							<p>Réponse publiée par {{reply.nickname}} le {{reply.createdAt|date("d/m/Y H:i") }}</p>
+							<div>{{reply.content|raw}}</div>
+						{% endfor %}
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="col-xs2 col-sm3" id="ajout-commentaire">
+				<h2>Ajouter un commentaire</h2>
+				{{ form(commentForm) }}
+				    
+				    
+                    <p>Message</p>
+                    <div id="editor"></div>
+				
+			</div>
+		</div>
+	</div>
+     
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		window.onload = () => {
+			
+
+			// On met un écouteur d'évènements sur tous les boutons répondre
+			    document.querySelectorAll("[data-reply]").forEach(element => {
+				element.addEventListener("click", function(){
+					document.querySelector("#comments_parentid").value = this.dataset.id;
+				});
+			});
+		}
+		
+	</script>
+{% endblock %}
