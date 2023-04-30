@@ -22,7 +22,7 @@ class CategoriesController extends AbstractController
         $catgs = $paginator->paginate(
             $catgs, /* query NOT result */
             $request->query->getInt('page', 1),
-            2
+            3
         );
         return $this->render('admin/categories/index.html.twig', [
             'categories' => $catgs,

@@ -848,6 +848,12 @@ h6 {
   min-width: 64px;
 }
 
+label {
+  display: inline-block;
+  width: 150px;
+  float: left;
+}
+
 .dashboard .activity .activity-item .activite-label::before {
   content: "";
   position: absolute;

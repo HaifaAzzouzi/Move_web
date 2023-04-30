@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'front.html.twig' %}
 
 {% block title %}
 	{{annonce.title}}
@@ -9,7 +9,7 @@
 	   
 		<div class="card mb-3">
 			{% for image in annonce.images %}
-				<img class="card-img-top" src="{{ asset('uploads/images/annonces/' ~ image.name)}}" width="600"
+				<img class="card-img-top" src="{{ asset('uploads/images/annonces/' ~ image.name)}}" width="50"
     				height="400" alt="{{ annonce.title }}"/>
 			{% endfor %}
 		
@@ -36,7 +36,8 @@
 						<h3>Commentaire de {{comment.nickname}}</h3>
 						<p>Publié le {{comment.createdAt|date("d/m/Y H:i") }}</p>
 						<div>{{comment.content|raw}}</div>
-						<p><a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" class="btn primary press">Répondre</a></p>
+						<a href="#ajout-commentaire" data-reply data-id="{{comment.id}}" class="btn primary press">Répondre</a>
+					    <a href="{{ path('supprimercomusr', {id: comment.id}) }}" class="btn btn-danger">Delete</a>
 
 						{# On affiche les réponses #}
 						{% for reply in comment.replies %}

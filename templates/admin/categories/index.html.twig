@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1>Gérer les catégories</h1>
-    <a href="{{ path("categories_ajout") }}" class="btn blue">Ajouter une catégorie</a>
+    <a href="{{ path("categories_ajout") }}" class="btn btn-success">Ajouter une catégorie</a>
 	<table class="table striped">
 		<thead>
 			<tr>
@@ -21,7 +21,7 @@
 				<td>{{categorie.name}}</td>
 				<td>{{categorie.parent}}</td>
 				<td class="text-center">
-                    <a href="{{ path("categories_modifier", {id: categorie.id}) }}" class="btn blue">Modifier</a>
+                    <a href="{{ path("categories_modifier", {id: categorie.id}) }}" class="btn btn-warning">Modifier</a>
 					<a href="{{ path('supprimerc', {id: categorie.id}) }}" class="btn btn-danger">Delete</a>
                 </td>
 			</tr>

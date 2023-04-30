@@ -95,5 +95,17 @@ class MainController extends AbstractController
             'annonces' => $annonces
         ]);
     }
+    #[Route('/main/comments/supprimer/{id}', name: 'supprimercomusr')]
+    public function supprimer(Comments $comment)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($comment);
+        $em->flush();
+
+        $this->addFlash('message', 'categories supprimée avec succès');
+        return $this->redirectToRoute('app_main');
+    
+    }
 
 }
